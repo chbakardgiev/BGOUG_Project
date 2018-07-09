@@ -1,0 +1,114 @@
+﻿@model WebApplication5.Models.member
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.typeMemebrship)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.typeMemebrship)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isPaidMembership)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isPaidMembership)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discountAllowance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discountAllowance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.referencedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.referencedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.company.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.company.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.interest.interest1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.interest.interest1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.members_events.IDMembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.members_events.IDMembers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.platform.platformType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.platform.platformType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

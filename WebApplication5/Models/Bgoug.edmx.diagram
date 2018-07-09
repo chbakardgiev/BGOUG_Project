@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ef71b45f17e84d0fa968d2515e2a4f0d" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="BGOUGModel.comment" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BGOUGModel.company" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="BGOUGModel.event" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BGOUGModel.interest" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BGOUGModel.member" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BGOUGModel.members_events" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="BGOUGModel.FK_events_comments" ManuallyRouted="false" />
+        <AssociationConnector Association="BGOUGModel.FK_members_companies" ManuallyRouted="false" />
+        <AssociationConnector Association="BGOUGModel.FK_members_events_events" ManuallyRouted="false" />
+        <AssociationConnector Association="BGOUGModel.FK_members_interests" ManuallyRouted="false" />
+        <AssociationConnector Association="BGOUGModel.FK_members_events_members" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BGOUGModel.platform" Width="1.5" PointX="4" PointY="5.625" />
+        <AssociationConnector Association="BGOUGModel.FK_members_platforms" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

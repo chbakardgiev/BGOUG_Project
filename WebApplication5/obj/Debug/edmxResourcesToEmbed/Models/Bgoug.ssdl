@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BGOUGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="comment" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="companies">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="businessType" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="events">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="place" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="description" Type="text" />
+    <Property Name="attendance" Type="int" Nullable="false" />
+    <Property Name="costs" Type="money" />
+    <Property Name="comments" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="interests">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="interest" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="members">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="position" Type="nvarchar" MaxLength="50" />
+    <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="telephone" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="typeMemebrship" Type="smallint" Nullable="false" />
+    <Property Name="isPaidMembership" Type="bit" Nullable="false" />
+    <Property Name="discountAllowance" Type="smallint" Nullable="false" />
+    <Property Name="currentCompany" Type="int" Nullable="false" />
+    <Property Name="interestFK" Type="int" />
+    <Property Name="platformFK" Type="int" />
+    <Property Name="referencedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="members-events">
+    <Key>
+      <PropertyRef Name="IDMembers" />
+    </Key>
+    <Property Name="IDMembers" Type="int" Nullable="false" />
+    <Property Name="IDEvents" Type="int" />
+  </EntityType>
+  <EntityType Name="platforms">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="platformType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_events_comments">
+    <End Role="comments" Type="Self.comments" Multiplicity="1" />
+    <End Role="events" Type="Self.events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="events">
+        <PropertyRef Name="comments" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members_companies">
+    <End Role="companies" Type="Self.companies" Multiplicity="1" />
+    <End Role="members" Type="Self.members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="companies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="members">
+        <PropertyRef Name="currentCompany" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members_interests">
+    <End Role="interests" Type="Self.interests" Multiplicity="0..1" />
+    <End Role="members" Type="Self.members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="interests">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="members">
+        <PropertyRef Name="interestFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members_platforms">
+    <End Role="platforms" Type="Self.platforms" Multiplicity="0..1" />
+    <End Role="members" Type="Self.members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="platforms">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="members">
+        <PropertyRef Name="platformFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members-events_events">
+    <End Role="events" Type="Self.events" Multiplicity="0..1" />
+    <End Role="members-events" Type="Self.members-events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="events">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="members-events">
+        <PropertyRef Name="IDEvents" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members-events_members">
+    <End Role="members" Type="Self.members" Multiplicity="1" />
+    <End Role="members-events" Type="Self.members-events" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="members">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="members-events">
+        <PropertyRef Name="IDMembers" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BGOUGModelStoreContainer">
+    <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="companies" EntityType="Self.companies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="events" EntityType="Self.events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="interests" EntityType="Self.interests" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="members" EntityType="Self.members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="members-events" EntityType="Self.members-events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="platforms" EntityType="Self.platforms" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_events_comments" Association="Self.FK_events_comments">
+      <End Role="comments" EntitySet="comments" />
+      <End Role="events" EntitySet="events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members_companies" Association="Self.FK_members_companies">
+      <End Role="companies" EntitySet="companies" />
+      <End Role="members" EntitySet="members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members_interests" Association="Self.FK_members_interests">
+      <End Role="interests" EntitySet="interests" />
+      <End Role="members" EntitySet="members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members_platforms" Association="Self.FK_members_platforms">
+      <End Role="platforms" EntitySet="platforms" />
+      <End Role="members" EntitySet="members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members-events_events" Association="Self.FK_members-events_events">
+      <End Role="events" EntitySet="events" />
+      <End Role="members-events" EntitySet="members-events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members-events_members" Association="Self.FK_members-events_members">
+      <End Role="members" EntitySet="members" />
+      <End Role="members-events" EntitySet="members-events" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

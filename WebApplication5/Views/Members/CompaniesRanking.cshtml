@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WebApplication5.Models.Ranking>
+
+@{
+    ViewBag.Title = "CompaniesRanking";
+}
+
+<h2>Companies Ranking</h2>
+<table class="grid">
+    <tr>
+        <th>These companies have employed most people</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td class="left">@item.Name </td>
+        <td class="left">@item.Count </td>
+    </tr>
+    }
+
+</table>
+
+

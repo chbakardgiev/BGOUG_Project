@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BGOUGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="comment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="events" Relationship="Self.FK_events_comments" FromRole="comments" ToRole="events" />
+  </EntityType>
+  <EntityType Name="company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="businessType" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="members" Relationship="Self.FK_members_companies" FromRole="companies" ToRole="members" />
+  </EntityType>
+  <EntityType Name="event">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="place" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="attendance" Type="Int32" Nullable="false" />
+    <Property Name="costs" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="comments" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="comment" Relationship="Self.FK_events_comments" FromRole="events" ToRole="comments" />
+    <NavigationProperty Name="members_events" Relationship="Self.FK_members_events_events" FromRole="events" ToRole="members_events" />
+  </EntityType>
+  <EntityType Name="interest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="interest1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="members" Relationship="Self.FK_members_interests" FromRole="interests" ToRole="members" />
+  </EntityType>
+  <EntityType Name="member">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="telephone" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="typeMemebrship" Type="Int16" Nullable="false" />
+    <Property Name="isPaidMembership" Type="Boolean" Nullable="false" />
+    <Property Name="discountAllowance" Type="Int16" Nullable="false" />
+    <Property Name="currentCompany" Type="Int32" Nullable="false" />
+    <Property Name="interestFK" Type="Int32" />
+    <Property Name="platformFK" Type="Int32" />
+    <Property Name="referencedBy" Type="Int32" />
+    <NavigationProperty Name="company" Relationship="Self.FK_members_companies" FromRole="members" ToRole="companies" />
+    <NavigationProperty Name="interest" Relationship="Self.FK_members_interests" FromRole="members" ToRole="interests" />
+    <NavigationProperty Name="members_events" Relationship="Self.FK_members_events_members" FromRole="members" ToRole="members_events" />
+    <NavigationProperty Name="platform" Relationship="BGOUGModel.FK_members_platforms" FromRole="member" ToRole="platform" />
+  </EntityType>
+  <EntityType Name="members_events">
+    <Key>
+      <PropertyRef Name="IDMembers" />
+    </Key>
+    <Property Name="IDMembers" Type="Int32" Nullable="false" />
+    <Property Name="IDEvents" Type="Int32" />
+    <NavigationProperty Name="event" Relationship="Self.FK_members_events_events" FromRole="members_events" ToRole="events" />
+    <NavigationProperty Name="member" Relationship="Self.FK_members_events_members" FromRole="members_events" ToRole="members" />
+  </EntityType>
+  <Association Name="FK_events_comments">
+    <End Role="comments" Type="Self.comment" Multiplicity="1" />
+    <End Role="events" Type="Self.event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="events">
+        <PropertyRef Name="comments" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members_companies">
+    <End Role="companies" Type="Self.company" Multiplicity="1" />
+    <End Role="members" Type="Self.member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="companies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="members">
+        <PropertyRef Name="currentCompany" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members_events_events">
+    <End Role="events" Type="Self.event" Multiplicity="0..1" />
+    <End Role="members_events" Type="Self.members_events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="events">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="members_events">
+        <PropertyRef Name="IDEvents" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members_interests">
+    <End Role="interests" Type="Self.interest" Multiplicity="0..1" />
+    <End Role="members" Type="Self.member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="interests">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="members">
+        <PropertyRef Name="interestFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members_events_members">
+    <End Role="members" Type="Self.member" Multiplicity="1" />
+    <End Role="members_events" Type="Self.members_events" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="members">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="members_events">
+        <PropertyRef Name="IDMembers" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BGOUGEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="comments" EntityType="Self.comment" />
+    <EntitySet Name="companies" EntityType="Self.company" />
+    <EntitySet Name="events" EntityType="Self.event" />
+    <EntitySet Name="interests" EntityType="Self.interest" />
+    <EntitySet Name="members" EntityType="Self.member" />
+    <EntitySet Name="members_events" EntityType="Self.members_events" />
+    <AssociationSet Name="FK_events_comments" Association="Self.FK_events_comments">
+      <End Role="comments" EntitySet="comments" />
+      <End Role="events" EntitySet="events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members_companies" Association="Self.FK_members_companies">
+      <End Role="companies" EntitySet="companies" />
+      <End Role="members" EntitySet="members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members_events_events" Association="Self.FK_members_events_events">
+      <End Role="events" EntitySet="events" />
+      <End Role="members_events" EntitySet="members_events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members_interests" Association="Self.FK_members_interests">
+      <End Role="interests" EntitySet="interests" />
+      <End Role="members" EntitySet="members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members_events_members" Association="Self.FK_members_events_members">
+      <End Role="members" EntitySet="members" />
+      <End Role="members_events" EntitySet="members_events" />
+    </AssociationSet>
+    <EntitySet Name="platforms" EntityType="BGOUGModel.platform" />
+    <AssociationSet Name="FK_members_platforms" Association="BGOUGModel.FK_members_platforms">
+      <End Role="platform" EntitySet="platforms" />
+      <End Role="member" EntitySet="members" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="platform">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="platformType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="members" Relationship="BGOUGModel.FK_members_platforms" FromRole="platform" ToRole="member" />
+  </EntityType>
+  <Association Name="FK_members_platforms">
+    <End Type="BGOUGModel.platform" Role="platform" Multiplicity="0..1" />
+    <End Type="BGOUGModel.member" Role="member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="platform">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="member">
+        <PropertyRef Name="platformFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

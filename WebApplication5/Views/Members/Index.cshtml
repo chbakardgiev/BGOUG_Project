@@ -1,0 +1,99 @@
+﻿@model IEnumerable<WebApplication5.Models.member>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.typeMemebrship)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isPaidMembership)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.discountAllowance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.referencedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.company.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.interest.interest1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.members_events.IDMembers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.platform.platformType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.typeMemebrship)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isPaidMembership)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.discountAllowance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.referencedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.company.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.interest.interest1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.members_events.IDMembers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.platform.platformType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

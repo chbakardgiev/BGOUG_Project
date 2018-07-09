@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WebApplication5.Models.IsPaid>
+
+@{
+    ViewBag.Title = "PaidMembership";
+}
+
+<h2>PaidMembership</h2>
+
+<table class="grid">
+    <tr>
+        <th>These have paid their membership</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="left">@item.Name </td>
+        </tr>
+    }
+
+</table>

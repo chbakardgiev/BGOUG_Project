@@ -1,0 +1,120 @@
+﻿@model WebApplication5.Models.member
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.typeMemebrship)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.typeMemebrship)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isPaidMembership)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isPaidMembership)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discountAllowance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discountAllowance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.referencedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.referencedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.company.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.company.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.interest.interest1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.interest.interest1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.members_events.IDMembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.members_events.IDMembers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.platform.platformType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.platform.platformType)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

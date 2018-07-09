@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WebApplication5.Models.EventRanking>
+@{
+    ViewBag.Title = "EventsRanking";
+}
+
+<h2>EventsRanking</h2>
+<table class="grid" border="1" cellpadding="10" width="100%">
+    <tr>
+        <th>Event </th>
+        <th>Date</th>
+        <th>Compnay</th>
+        <th>CompanyEmployees</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td class="left">@item.EventName </td>
+        <td class="left">@item.Date </td>
+        <td class="left">@item.CompanyName </td>
+        <td class="left">@item.CompanyEmployees </td>
+    </tr>
+    }
+</table>
+
